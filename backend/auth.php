@@ -1,8 +1,9 @@
 <?php
 include 'connect.php';
-class Auth{
+class Auth
+{
     public $message = "";
-     public function register($username, $password, $conn)
+    public function register($username, $password, $conn)
     {
         // Check if username already exists
         $checkStmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
@@ -27,33 +28,37 @@ class Auth{
         $checkStmt->close();
     }
 
-    public function login($username, $password, $conn){
-        $cmd = $conn->prepare("SELECT password FROM users WHERE username = ? AND password = ?");
-        $cmd->bind_param("ss", $username, $password);
+    public function login($username, $password, $conn)
+    {
+        $cmd = $conn->prepare("SELECT password FROM users WHERE username = ?");
+        $cmd->bind_param("s", $username);
         $cmd->execute();
-        $cmd->store_result();
 
-        if($cmd->num_rows > 0){
-            $result = $cmd->fetch_assoc();
+        $result = $cmd->get_result();
 
-            if(password_verify($password, $result['password'])){
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            if (password_verify($password, $row['password'])) {
                 $this->message = "Login successful";
-                header("location: ../src/pages/dashboard.html");
-            }else{
+            } else {
                 $this->message = "Incorrect password";
             }
-        }else{
+        } else {
             $this->message = "User not found";
         }
+
         $cmd->close();
     }
 
-    public function logout(){
-        
+
+    public function logout()
+    {
+
     }
 
-    public function messageAuth(){
-        return $this->message;   
+    public function messageAuth()
+    {
+        return $this->message;
     }
 }
 ?>

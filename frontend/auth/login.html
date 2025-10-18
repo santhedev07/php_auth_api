@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="min-h-screen flex flex-col">
+    <header class="w-full h-16 bg-gray-800 text-white flex items-center justify-between px-6">
+        <div class="logo italic font-semibold">Todo List</div>
+        <div class="nav flex space-x-4">
+            <a href="../index.html">Home</a>
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+        </div>
+    </header>
+    <main class="flex-grow flex items-center justify-center">
+        <div class="w-full max-w-md mx-auto p-6 border border-gray-300 rounded-lg shadow-lg flex flex-col items-center">
+            <h2 class="text-2xl font-bold">Login</h2>
+            <div id="error" class="text-red-500 mb-4"></div>
+            <div id="success" class="text-green-500 mb-4"></div>
+            <form id="loginForm" method="POST">
+                <label for="username">Username</label>
+                <input class="mb-5 h-10 p-4 border border-gray-300 rounded-lg w-full" type="text" id="username" placeholder="Username" name="username" required /><br>
+                <label for="Username">Password</label>
+                <input class="mb-5 h-10 p-4 border border-gray-300 rounded-lg w-full" type="password" id="password" placeholder="Password" name="password" required /><br>
+                <button class="text-center bg-gray-300 p-3 w-full rounded-lg mb-3" type="submit">Login</button>
+            </form>
+        </div>
+    </main>
+    <footer class="mt-auto">
+        <div class="w-full h-16 bg-gray-800 text-white flex items-center justify-center">
+            &copy; 2024 Todo List App
+        </div>
+    </footer>
+    <script src="../js/login.js"></script>
+</body>
+
+</html>
